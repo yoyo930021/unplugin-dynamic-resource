@@ -1,0 +1,17 @@
+{
+  "name": "unplugin-dynamic-resource",
+  "version": "0.1.0",
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "description": "use dynamic require resource with webpack and vite",
+  "repository": "https://github.com/yoyo930021/unplugin-dynamic-resource.git",
+  "author": "yoyo930021",
+  "license": "MIT",
+  "dependencies": {
+    "unplugin": "^0.2.16"
+  },
+  "devDependencies": {
+    "@semantic-release/git": "^10.0.0",
+    "semantic-release": "^18.0.0"
+  }
+}
