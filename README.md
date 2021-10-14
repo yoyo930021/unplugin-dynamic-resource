@@ -1,6 +1,6 @@
 # unplugin-dynamic-resource
 
-a unplugin for support dynamic require resource
+A unplugin for support dynamic require resource(png/jpg/svg). Used in shared library when cross bundler in monorepo.
 
 ## Support bundler
 - vite
