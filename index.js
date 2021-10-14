@@ -4,7 +4,7 @@ const { createUnplugin } = require('unplugin')
 /**
  * @type {import('unplugin').UnpluginInstance<{ fn?: string, include?: (id: string) => boolean, esModule?: boolean }>}
  */
-const dynamicResourceUnPlugin = createUnplugin((options, meta) => {
+const dynamicResourceUnplugin = createUnplugin((options, meta) => {
   if (!['vite', 'webpack'].includes(meta.framework)) {
     throw new Error('No support framework.')
   }
@@ -18,7 +18,7 @@ const dynamicResourceUnPlugin = createUnplugin((options, meta) => {
   })()
 
   return {
-    name: 'dynmaic-resource-unplugin',
+    name: 'dynamic-resource-unplugin',
     transformInclude (id) {
       return options?.include?.(id) ?? id.endsWith('.js')
     },
@@ -29,5 +29,5 @@ const dynamicResourceUnPlugin = createUnplugin((options, meta) => {
 })
 
 module.exports = {
-  dynamicResourceUnPlugin
+  dynamicResourceUnplugin
 }
