@@ -19,6 +19,7 @@ const dynamicResourceUnplugin = createUnplugin((options, meta) => {
 
   return {
     name: 'dynamic-resource-unplugin',
+    enforce: 'pre',
     transformInclude (id) {
       return options?.include?.(id) ?? id.endsWith('.js')
     },
