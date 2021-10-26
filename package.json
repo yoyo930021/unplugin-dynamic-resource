@@ -1,6 +1,6 @@
 {
   "name": "unplugin-dynamic-resource",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "main": "./index.js",
   "types": "./index.d.ts",
   "description": "use dynamic require resource with webpack and vite",
