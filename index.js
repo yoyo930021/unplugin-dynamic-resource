@@ -23,10 +23,12 @@ const dynamicResourceUnplugin = createUnplugin((options, meta) => {
     transformInclude (id) {
       return options?.include?.(id) ?? id.endsWith('.js')
     },
-    transform (code) {
-      if (code.includes(fn) && debug) {
+    transform (code, id) {
+      if (debug) {
+        console.log(`${id}------------`)
         console.log(`code: ${code}`)
         console.log(regex.exec(code))
+        console.log('---------------')
       }
       return code.replace(regex, (_, stat) => replacer(stat))
     }
