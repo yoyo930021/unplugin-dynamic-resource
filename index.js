@@ -2,13 +2,14 @@ const { createUnplugin } = require('unplugin')
 
 
 /**
- * @type {import('unplugin').UnpluginInstance<{ fn?: string, include?: (id: string) => boolean, esModule?: boolean }>}
+ * @type {import('unplugin').UnpluginInstance<{ fn?: string, include?: (id: string) => boolean, esModule?: boolean, debug: boolean }>}
  */
 const dynamicResourceUnplugin = createUnplugin((options, meta) => {
   if (!['vite', 'webpack'].includes(meta.framework)) {
     throw new Error('No support framework.')
   }
 
+  const debug = options?.debug ?? false
   const fn = options?.fn ?? '__dynamicResource'
   const regex = new RegExp(`${fn}\\s*\\(\\s*(\`([./\\w]|\$\{[\\w.()]+\})+\`|['"][./\\w+ \s'"]+['"]|['"][\\w/.]+['"]\\.concat\\([/\\w, '".()]+\\))\\s*,\\s*['"\`]__resource__['"\`]\\s*\\)`, 'gm')
   const replacer = (() => {
@@ -23,10 +24,11 @@ const dynamicResourceUnplugin = createUnplugin((options, meta) => {
       return options?.include?.(id) ?? id.endsWith('.js')
     },
     transform (code) {
-      return code.replace(regex, (_, stat) => {
-        console.log(_)
-        return replacer(stat)
-      })
+      if (code.includes(fn) && debug) {
+        console.log(`code: ${code}`)
+        console.log(regex.exec(code))
+      }
+      return code.replace(regex, (_, stat) => replacer(stat))
     }
   }
 })
