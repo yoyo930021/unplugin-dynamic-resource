@@ -24,7 +24,7 @@ const dynamicResourceUnplugin = createUnplugin((options, meta) => {
       return options?.include?.(id) ?? id.endsWith('.js')
     },
     transform (code, id) {
-      if (debug) {
+      if (debug && id.includes('BankImage.js')) {
         console.log(`${id}------------`)
         console.log(`code: ${code}`)
         console.log(regex.exec(code))
