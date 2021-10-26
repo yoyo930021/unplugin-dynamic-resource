@@ -39,7 +39,7 @@ module.exports = {
 ## Usage
 ```javascript
 // Usage
-export const getIconImage = (iconName) => __dynamicResource(`../assets/icon/${iconName}.png`)
+export const getIconImage = (iconName) => __dynamicResource(`../assets/icon/${iconName}.png`, '__resource__')
 
 // Will convert to....
 // webpack
