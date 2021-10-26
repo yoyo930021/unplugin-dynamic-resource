@@ -10,7 +10,7 @@ const dynamicResourceUnplugin = createUnplugin((options, meta) => {
   }
 
   const fn = options?.fn ?? '__dynamicResource'
-  const regex = new RegExp(`${fn}\\s*\\(\\s*(.*)\\s*,\\s*['"\`]__resource__['"\`]\\s*\\)`, 'g')
+  const regex = new RegExp(`${fn}\\s*\\(\\s*(\`([./\\w]|\\$\\{[\\w.()]+\\})+\`|['"][./\\w+ \s'"]+['"]|['"][\\w/.]+['"]\\.concat\\([/\\w, '".]+\\))\\s*,\\s*['"\`]__resource__['"\`]\\s*\\)`, 'gm')
   const replacer = (() => {
     if (meta.framework === 'webpack') return (stat) => `require(${stat})${options?.esModule ? '.default' : ''}`
     if (meta.framework === 'vite') return (stat) => `new URL(${stat}, import.meta${''}.url).href`
