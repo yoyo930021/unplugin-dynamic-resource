@@ -11,7 +11,7 @@ const dynamicResourceUnplugin = createUnplugin((options, meta) => {
 
   const debug = options?.debug ?? false
   const fn = options?.fn ?? '__dynamicResource'
-  const regex = new RegExp(`${fn}\\s*\\(\\s*(\`([./\\w]|\\$\{[\\w.()]+\})+\`|['"][./\\w+ \s'"]+['"]|['"][\\w/.]+['"]\\.concat\\([/\\w, '".()]+\\))\\s*,\\s*['"\`]__resource__['"\`]\\s*\\)`, 'gm')
+  const regex = new RegExp(`${fn}\\s*\\(\\s*(.*)\\s*,\\s*['"\`]__resource__['"\`]\\s*\\)`, 'gm')
   const replacer = (() => {
     if (meta.framework === 'webpack') return (stat) => `require(${stat})${options?.esModule ? '.default' : ''}`
     if (meta.framework === 'vite') return (stat) => `new URL(${stat}, import.meta${''}.url).href`
@@ -24,7 +24,7 @@ const dynamicResourceUnplugin = createUnplugin((options, meta) => {
       return options?.include?.(id) ?? id.endsWith('.js')
     },
     transform (code, id) {
-      if (debug && id.includes('BankImage.js')) {
+      if (code.includes(fn) && debug) {
         console.log(`${id}------------`)
         console.log(`code: ${code}`)
         console.log(regex.exec(code))
