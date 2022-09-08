@@ -8,10 +8,10 @@
   "author": "yoyo930021",
   "license": "MIT",
   "dependencies": {
-    "unplugin": "^0.2.16"
+    "unplugin": "^0.9.5"
   },
   "devDependencies": {
-    "@semantic-release/git": "^10.0.0",
-    "semantic-release": "^18.0.0"
+    "@semantic-release/git": "^10.0.1",
+    "semantic-release": "^19.0.5"
   }
 }
